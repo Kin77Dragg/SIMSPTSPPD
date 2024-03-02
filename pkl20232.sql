@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 29, 2024 at 12:08 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Mar 02, 2024 at 12:03 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,18 +35,23 @@ CREATE TABLE `headersurat` (
   `Perihal` text DEFAULT NULL,
   `TglSurat` datetime NOT NULL DEFAULT current_timestamp(),
   `TujuanSurat` text NOT NULL,
-  `HariKegiatan` text NOT NULL,
-  `TanggalAwal` date NOT NULL,
+  `TanggalAwal` datetime NOT NULL DEFAULT current_timestamp(),
+  `TanggalAkhir` datetime NOT NULL DEFAULT current_timestamp(),
   `TempatKegiatan` text NOT NULL,
-  `AcaraKegiatan` text NOT NULL
+  `AcaraKegiatan` text NOT NULL,
+  `ValidasiSPPDKabag` tinyint(1) DEFAULT 0,
+  `ValidasiSPTKabag` tinyint(1) NOT NULL DEFAULT 0,
+  `ValidasiSPTSekwan` tinyint(1) NOT NULL DEFAULT 0,
+  `ValidasiSPTKetua` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `headersurat`
 --
 
-INSERT INTO `headersurat` (`IdSurat`, `NomorSurat`, `SifatSurat`, `Lampiran`, `Perihal`, `TglSurat`, `TujuanSurat`, `HariKegiatan`, `TanggalAwal`, `TempatKegiatan`, `AcaraKegiatan`) VALUES
-(1, '1', NULL, NULL, NULL, '2024-02-29 17:11:42', '', '', '0000-00-00', '', '');
+INSERT INTO `headersurat` (`IdSurat`, `NomorSurat`, `SifatSurat`, `Lampiran`, `Perihal`, `TglSurat`, `TujuanSurat`, `TanggalAwal`, `TanggalAkhir`, `TempatKegiatan`, `AcaraKegiatan`, `ValidasiSPPDKabag`, `ValidasiSPTKabag`, `ValidasiSPTSekwan`, `ValidasiSPTKetua`) VALUES
+(0, '170/10/KOMISI.II/DPRD/2024', 'Penting', '1 (Satu)', 'makan malam bareng kawan kawan dprd', '0000-00-00 00:00:00', 'bapak yeri ', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'berkas', 'makan bersama', NULL, 0, 0, 0),
+(1, '1', NULL, NULL, NULL, '2024-02-29 17:11:42', '', '0000-00-00 00:00:00', '2024-03-01 00:00:00', '', '', NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -90,10 +95,17 @@ INSERT INTO `level` (`idlevel`, `namalevel`) VALUES
 --
 
 CREATE TABLE `pangkatgolongan` (
-  `idPangGol` int(5) NOT NULL,
-  `Pangkat` varchar(20) NOT NULL,
-  `Golongan` varchar(10) NOT NULL
+  `idPanGol` int(5) NOT NULL,
+  `Golongan` varchar(10) NOT NULL,
+  `Pangkat` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pangkatgolongan`
+--
+
+INSERT INTO `pangkatgolongan` (`idPanGol`, `Golongan`, `Pangkat`) VALUES
+(3, '1A', 'sekda');
 
 -- --------------------------------------------------------
 
@@ -187,7 +199,7 @@ ALTER TABLE `level`
 -- Indexes for table `pangkatgolongan`
 --
 ALTER TABLE `pangkatgolongan`
-  ADD PRIMARY KEY (`idPangGol`);
+  ADD PRIMARY KEY (`idPanGol`);
 
 --
 -- Indexes for table `pengguna`
@@ -222,19 +234,19 @@ ALTER TABLE `keperluan`
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
-  MODIFY `idlevel` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idlevel` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pangkatgolongan`
 --
 ALTER TABLE `pangkatgolongan`
-  MODIFY `idPangGol` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPanGol` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_login` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_login` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pesertakegiatan`
