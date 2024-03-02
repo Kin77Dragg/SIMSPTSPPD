@@ -12,27 +12,38 @@ if (!isset($_SESSION)) session_start();
  
   <style>
   .gradient-custom-2 {
-/* fallback for old browsers */
-background: #fccb90;
+      background: #fccb90;
+      background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+      background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    }
 
-/* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
 
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-}
+    .custom-heading {
+        font-family: 'Perpetua', sans-serif; 
+        font-size: 26px; 
+        font-weight: bold; 
+        color: #white; 
+    }
 
-@media (min-width: 768px) {
-.gradient-form {
-height: 100vh !important;
-}
-}
-@media (min-width: 769px) {
-.gradient-custom-2 {
-border-top-right-radius: .3rem;
-border-bottom-right-radius: .3rem;
-}
-}
+    .custom-paragraph {
+        font-family: 'Open Sans', sans-serif; 
+        font-style: italic;
+        font-size: 16px; 
+        line-height: 1.5; 
+        color: #white; 
+        text-align: justify;
+    }
   </style>
   
 </head>
@@ -46,12 +57,11 @@ border-bottom-right-radius: .3rem;
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
 
-                <div class="text-center">
-                  <img src="images/logobv.jpeg"
-                    style="width: 185px;" alt="logo">
-                  <h4 class="mt-1 mb-5 pb-1">Assalamu'alaikum</h4>
-                </div>
-
+              <div class="text-center" style="text-align: center; font-family: 'Times New Roman', Times, serif;">
+                <img src="images/LogoDPRD.png" style="width: 110px;" alt="logo">
+                <h5 class="mt-1 mb-5 pb-1" style="margin-top: 1em; margin-bottom: 5em; padding-bottom: 1em; font-size: 1.5em; font-weight: bold;">DPRD KOTA BENGKULU</h5>
+                <p style="font-style: italic;"><i>Silahkan Masukkan Username dan Password Anda !</i></p>
+            </div>
 
 <?php 
 if (isset($_POST['bLogin'])) {
@@ -77,21 +87,16 @@ if (isset($_POST['bLogin'])) {
 }
 ?>
                 <form method="post" action="">
-                  <p>Silahkan login dengan akun yang telah diberikan</p>
-
                   <div class="form-outline mb-4">
-                    <input type="text" id="Username" name="Username" class="form-control"
-                      placeholder="Ketik kode login anda" required autocomplete="off"/>
-                    <label class="form-label" for="Username">Username</label>
-                  </div>
-
+                    <label class="form-label" for="Username"><b>Username :</b></label>
+                    <input type="text" id="Username" name="Username" class="form-control" placeholder="Masukkan Username" required autocomplete="off"/>
+                    </div>
                   <div class="form-outline mb-4">
-                    <input type="password" id="Password" Name="Password" class="form-control" />
-                    <label class="form-label" for="Password" required autocomplete="off" />Password</label>
+                    <label class="form-label" for="Password" required autocomplete="off"><b>Password :</b></label>
+                    <input type="password" id="Password" Name="Password" class="form-control" placeholder="Masukkan Password" />
                   </div>
-
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <input name="bLogin" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="Login">
+                    <input name="bLogin" class="btn btn-outline-success btn-block fa-lg  mb-3" type="submit" value="Login">
                     <!--a class="text-muted" href="#!">Forgot password?</a-->
                   </div>
 
@@ -103,16 +108,14 @@ if (isset($_POST['bLogin'])) {
                 </form>
               </div>
             </div>
-            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+            <div class="col-lg-6 d-flex align-items-center" style="background-image: url('./images/pakis.jpg'); background-size: cover; background-position: center;">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
-                <p class="small mb-0">اللهم وفقنا لطاعتك وأثيم تقصيرنا وتقبل منا إنك أنت السميع العليم وصلى الله على سيدنا محمد وآله وصحبه وسلم والحمد لله رب العالمين
-<br>
-“Allahumma waffiqna li tha‘atika, wa atmim taqshirana, wa taqabbal minna, innaka antas sami‘ul ‘alim. Wa shallallahu ‘ala sayyidina muhammadin wa ‘alihi wa shahbihi wa sallam. Walhamdulillahi rabbil ‘alamin.”<br>
-Artinya: Ya Allah, bimbinglah jalan kami pada jalan ketaatan kepada-Mu, sempurnakanlah kekurangan kami, terimalah ibadah kami. Sungguh, Kau maha mendengar lagi mengetahui. Semoga Allah melimpahkan shalawat dan salam-Nya kepada Nabi Muhammad SAW, keluarga, dan para sahabatnya.
-</p>
+              <h4 class="mb-4 custom-heading">Bersama, Kita Ciptakan Kemajuan</h4>
+                <p class="small mb-0 custom-paragraph">"Bersama-sama, kita mengukir kemajuan yang lebih baik untuk melayani masyarakat dengan sepenuh hati. Mari kita jadikan setiap langkah sebagai batu loncatan untuk mencapai tujuan bersama, demi kebaikan bersama.  Bersatu kita teguh, bercerai kita runtuh. Bersama, kita mewujudkan cita-cita yang mulia untuk negeri tercinta."
+                </p>
               </div>
             </div>
+
           </div>
         </div>
       </div>
