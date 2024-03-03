@@ -10,7 +10,7 @@
 			alert('Permohonan Baru'); window.location.href='formpermohonankosong.php';</script>";
 		}else{
 			echo "<script>
-			alert('Permohonan Ditemukan'); window.location.href='formpermohonanisi.php';</script>";
+			alert('Permohonan Ditemukan'); window.location.href='formpermohonanisi.php?NomorSurat=".$r['NomorSurat']."';</script>";
 		}
 	}
 ?>

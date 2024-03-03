@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2024 at 08:05 AM
+-- Generation Time: Mar 01, 2024 at 07:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,23 +35,21 @@ CREATE TABLE `headersurat` (
   `Perihal` text DEFAULT NULL,
   `TglSurat` datetime NOT NULL DEFAULT current_timestamp(),
   `TujuanSurat` text NOT NULL,
+  `HariAwal` varchar(50) NOT NULL DEFAULT current_timestamp(),
+  `HariAkhir` varchar(50) NOT NULL DEFAULT current_timestamp(),
   `TanggalAwal` datetime NOT NULL DEFAULT current_timestamp(),
   `TanggalAkhir` datetime NOT NULL DEFAULT current_timestamp(),
   `TempatKegiatan` text NOT NULL,
-  `AcaraKegiatan` text NOT NULL,
-  `ValidasiSPPDKabag` tinyint(1) DEFAULT 0,
-  `ValidasiSPTKabag` tinyint(1) NOT NULL DEFAULT 0,
-  `ValidasiSPTSekwan` tinyint(1) NOT NULL DEFAULT 0,
-  `ValidasiSPTKetua` tinyint(1) NOT NULL DEFAULT 0
+  `AcaraKegiatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `headersurat`
 --
 
-INSERT INTO `headersurat` (`IdSurat`, `NomorSurat`, `SifatSurat`, `Lampiran`, `Perihal`, `TglSurat`, `TujuanSurat`, `TanggalAwal`, `TanggalAkhir`, `TempatKegiatan`, `AcaraKegiatan`, `ValidasiSPPDKabag`, `ValidasiSPTKabag`, `ValidasiSPTSekwan`, `ValidasiSPTKetua`) VALUES
-(0, '170/10/KOMISI.II/DPRD/2024', 'Penting', '1 (Satu)', 'makan malam bareng kawan kawan dprd', '0000-00-00 00:00:00', 'bapak yeri ', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'berkas', 'makan bersama', NULL, 0, 0, 0),
-(1, '1', NULL, NULL, NULL, '2024-02-29 17:11:42', '', '0000-00-00 00:00:00', '2024-03-01 00:00:00', '', '', NULL, 0, 0, 0);
+INSERT INTO `headersurat` (`IdSurat`, `NomorSurat`, `SifatSurat`, `Lampiran`, `Perihal`, `TglSurat`, `TujuanSurat`, `HariAwal`, `HariAkhir`, `TanggalAwal`, `TanggalAkhir`, `TempatKegiatan`, `AcaraKegiatan`) VALUES
+(0, '170/10/KOMISI.II/DPRD/2024', 'Penting', '1 (Satu)', 'makan malam bareng kawan kawan dprd', '0000-00-00 00:00:00', 'bapak yeri ', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'berkas', 'makan bersama'),
+(1, '1', NULL, NULL, NULL, '2024-02-29 17:11:42', '', '0000-00-00 00:00:00', '2024-03-01 14:52:55', '0000-00-00 00:00:00', '2024-03-01 00:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -95,17 +93,10 @@ INSERT INTO `level` (`idlevel`, `namalevel`) VALUES
 --
 
 CREATE TABLE `pangkatgolongan` (
-  `idPanGol` int(5) NOT NULL,
-  `Golongan` varchar(10) NOT NULL,
-  `Pangkat` varchar(20) NOT NULL
+  `idPangGol` int(5) NOT NULL,
+  `Pangkat` varchar(20) NOT NULL,
+  `Golongan` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pangkatgolongan`
---
-
-INSERT INTO `pangkatgolongan` (`idPanGol`, `Golongan`, `Pangkat`) VALUES
-(3, '1A', 'sekda');
 
 -- --------------------------------------------------------
 
@@ -122,16 +113,15 @@ CREATE TABLE `pengguna` (
   `no_pegawai` varchar(20) NOT NULL,
   `idlevel` int(2) DEFAULT NULL,
   `idunit` int(2) DEFAULT NULL,
-  `Status` enum('Aktif','TidakAktif') DEFAULT NULL,
-  `IdTingkat` int(11) DEFAULT NULL
+  `Status` enum('Aktif','TidakAktif') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`id_login`, `nik`, `username`, `nama_lengkap`, `password`, `no_pegawai`, `idlevel`, `idunit`, `Status`, `IdTingkat`) VALUES
-(1, '1771050312030003', 'Ikhwan', 'Ikhwan Fauzi', '033213', '20552011', 1, 1, NULL, 0);
+INSERT INTO `pengguna` (`id_login`, `nik`, `username`, `nama_lengkap`, `password`, `no_pegawai`, `idlevel`, `idunit`, `Status`) VALUES
+(1, '1771050312030003', 'Ikhwan', 'Ikhwan Fauzi', '033213', '20552011', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -144,21 +134,7 @@ CREATE TABLE `pesertakegiatan` (
   `idSurat` int(11) NOT NULL,
   `id_login` int(30) NOT NULL,
   `Setuju` enum('Setuju','Tidak Setuju') NOT NULL,
-  `WaktuSetuju` datetime DEFAULT current_timestamp(),
-  `Maksud` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tingkatperjalanandinas`
---
-
-CREATE TABLE `tingkatperjalanandinas` (
-  `IdTingkat` int(3) NOT NULL,
-  `Tingkat` varchar(20) NOT NULL,
-  `NamaTingkat` varchar(20) NOT NULL,
-  `BesaranBiaya` varchar(20) NOT NULL
+  `WaktuSetuju` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -214,7 +190,7 @@ ALTER TABLE `level`
 -- Indexes for table `pangkatgolongan`
 --
 ALTER TABLE `pangkatgolongan`
-  ADD PRIMARY KEY (`idPanGol`);
+  ADD PRIMARY KEY (`idPangGol`);
 
 --
 -- Indexes for table `pengguna`
@@ -228,12 +204,6 @@ ALTER TABLE `pengguna`
 ALTER TABLE `pesertakegiatan`
   ADD PRIMARY KEY (`idPeserta`),
   ADD KEY `idSurat` (`idSurat`);
-
---
--- Indexes for table `tingkatperjalanandinas`
---
-ALTER TABLE `tingkatperjalanandinas`
-  ADD PRIMARY KEY (`IdTingkat`);
 
 --
 -- Indexes for table `unit`
@@ -255,31 +225,25 @@ ALTER TABLE `keperluan`
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
-  MODIFY `idlevel` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idlevel` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pangkatgolongan`
 --
 ALTER TABLE `pangkatgolongan`
-  MODIFY `idPanGol` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idPangGol` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_login` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_login` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pesertakegiatan`
 --
 ALTER TABLE `pesertakegiatan`
   MODIFY `idPeserta` int(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tingkatperjalanandinas`
---
-ALTER TABLE `tingkatperjalanandinas`
-  MODIFY `IdTingkat` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `unit`

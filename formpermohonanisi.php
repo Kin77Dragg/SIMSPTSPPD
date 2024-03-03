@@ -1,8 +1,18 @@
-
+<?php
+		include('koneksi.db.php');
+		if (isset($_GET['NomorSurat'])){
+			$NomorSurat=filter_var($_GET['NomorSurat'],FILTER_SANITIZE_STRING);
+			$sql="SELECT * FROM `headersurat` WHERE NomorSurat='".$NomorSurat."'";
+			$q=mysqli_query($koneksi, $sql);
+			$r=mysqli_fetch_array($q);
+		} 
+			?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Surat Permohonaan Dinas Luar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <style>
             table tr td{
                 font-size: 13px;
@@ -18,7 +28,8 @@
         </style>
     </head>
     <body>
-        <center>
+    
+        <center>  
             <form method="post">
             <table width="680">
                 <tr>
@@ -40,7 +51,7 @@
                 <tr>
                     <td class="text">
                         <div class="col">
-                            <input type="date" class="form-control" id="TglSurat" name="TglSurat">
+                        <input type="date" class="form-control" id="TglSurat" name="TglSurat" value="<?php echo $r['TglSurat'];?>">
                         </div>
                     </td>
                 </tr>
@@ -49,7 +60,8 @@
                 <tr>
                     <td style="font-size: 12px; font-family: time new romance;">Nomor</td>
                     <td width="100">:
-                        <input style="font-size: 12px; font-family: time new romance; width: 182px;" id="NomorSurat" name="NomorSurat" type="text" >
+                        <input style="font-size: 12px; font-family: time new romance; width: 182px;" id="NomorSurat" name="NomorSurat" type="text" value="<?php echo $r['NomorSurat']; ?>">
+                        <input style="font-size: 12px; font-family: time new romance; width: 182px;" id="IdSurat" name="IdSurat" type="hidden" value="<?php echo $r['IdSurat']; ?>">
                     </td> 
                     <td width="500" style="font-size: 12px; font-family: time new romance; line-height:1.5;">
                         Kepada Yth.
@@ -58,17 +70,17 @@
                 <tr>
                     <td style="font-size: 12px; font-family: time new romance;">Sifat</td>
                     <td width="100">:
-                        <input style= "font-size: 12px; font-family: time new romance; width: 182px;" id="SifatSurat" name="SifatSurat" type="text" >
+                        <input style= "font-size: 12px; font-family: time new romance; width: 182px;" id="SifatSurat" name="SifatSurat" type="text" value="<?php echo $r['SifatSurat'];?>">
                     </td> 
                     <td style="line-height:1.5;" class="">
                         <input style="font-size: 12px; font-family: time new romance; width: 150px;" id="TujuanSurat" name="TujuanSurat" 
-                        type="text" class="form-control">
+                        type="text" class="form-control" value="<?php echo $r['TujuanSurat'];?>">
                     </td>
                 </tr>
                 <tr>
                     <td style="font-size: 12px; font-family: time new romance;">Lampiran</td>
                     <td width="100">:
-                        <input style="font-size: 12px; font-family: time new romance; width: 182px;" id="Lampiran" name="Lampiran" type="text" >
+                        <input style="font-size: 12px; font-family: time new romance; width: 182px;" id="Lampiran" name="Lampiran" type="text" value="<?php echo $r['Lampiran']; ?>">
                     </td> 
                     <td style="font-size: 12px; font-family: time new romance; line-height:1.5;">
                         Di-
@@ -77,7 +89,7 @@
                 <tr>
                     <td style="font-size: 12px; font-family: time new romance;">Perihal</td>
                     <td width="581">: 
-                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="Perihal" name="Perihal" class="form-control" cols="50" rows="2"></textarea>
+                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="Perihal" name="Perihal" class="form-control" cols="50" rows="2" value="<?php echo $r['Perihal']; ?>"></textarea>
                     </td>
                     <td style="line-height:1.5;" class="tujuan" style="font-size: 12px; font-family: time new romance;">
                         <b>Bengkulu</b>
@@ -85,6 +97,7 @@
                 </tr>
             </table>
             <br>
+
             <table width="612">
                 <tr>
                     <td width="55"></td>
@@ -104,71 +117,70 @@
                     <td width="55"></td>
                     <td style="font-size: 12px; font-family: time new romance;">Tanggal</td>
                     <td class="col"> :
-                        <input style="font-size: 12px; font-family: time new romance;" type="date" class="form-control" id="TanggalAwal" name="TanggalAwal">
+                        <input style="font-size: 12px; font-family: time new romance;" type="date" class="form-control" id="TanggalAwal" name="TanggalAwal" value="<?php echo $r['TanggalAwal'];?>">
                         s/d <input style="font-size: 12px; font-family: time new romance;" id="TanggalAkhir" name="TanggalAkhir" 
-                        type="date" class="form-control">
+                        type="date" class="form-control" value="<?php echo $r['TanggalAkhir'];?>">
                     </td>
                 </tr>
                 <tr>
                     <td width="55"></td>
                     <td style="font-size: 12px; font-family: time new romance;">Tempat</td>
                     <td style="line-height:1.5;">:
-                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="TempatKegiatan" name="TempatKegiatan" class="form-control" cols="50" rows="1"></textarea>
+                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="TempatKegiatan" name="TempatKegiatan" class="form-control" cols="50" rows="1" value="<?php echo $r['TempatKegiatan'];?>"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td width="55"></td>
                     <td style="font-size: 12px; font-family: time new romance;">Acara</td>
                     <td style="line-height:1.5;">:
-                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="AcaraKegiatan" name="AcaraKegiatan" class="form-control" cols="50" rows="1"></textarea>
+                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="AcaraKegiatan" name="AcaraKegiatan" class="form-control" cols="50" rows="1" value="<?php echo $r['AcaraKegiatan'];?>"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td width="55"></td>
                     <td style="font-size: 12px; font-family: time new romance;">Alat Transportasi</td>
                     <td style="line-height:1.5;">:
-                        <textarea style="font-size: 12px; font-family: time new romance; width: 320px;" id="AlatAngkutan" name="AlatAngkutan" class="form-control" cols="50" rows="1"></textarea>
+                        <input style="font-size: 12px; font-family: time new romance; width: 320px;" id="AlatAngkutan" name="AlatAngkutan" class="form-control" cols="50" rows="1">
                     </td>
                 </tr>
             </table>
-			<table width="614">
+            <br>
             <div class="form-group row">
-                <div class="offset-4 col-8">
-                    <button name="submit" type="submit" class="btn btn-primary" style="font-family: time new romance;">Simpan</button>
-                </div>
-                </div>
-			</table>
-
-            <?php 
-                if (isset($_POST['submit'])) {
-                    $TglSurat=filter_var($_POST['TglSurat'],FILTER_SANITIZE_STRING);
-                    $NomorSurat=filter_var($_POST['NomorSurat'],FILTER_SANITIZE_STRING);
-                    $SifatSurat=filter_var($_POST['SifatSurat'],FILTER_SANITIZE_STRING);
-                    $TujuanSurat=filter_var($_POST['TujuanSurat'],FILTER_SANITIZE_STRING);
-                    $Lampiran=filter_var($_POST['Lampiran'],FILTER_SANITIZE_STRING);
-                    $Perihal=filter_var($_POST['Perihal'],FILTER_SANITIZE_STRING);
-                    $TanggalAwal=filter_var($_POST['TanggalAwal'],FILTER_SANITIZE_STRING);
-                    $TanggalAkhir=filter_var($_POST['TanggalAkhir'],FILTER_SANITIZE_STRING);
-                    $TempatKegiatan=filter_var($_POST['TempatKegiatan'],FILTER_SANITIZE_STRING);
-                    $AcaraKegiatan=filter_var($_POST['AcaraKegiatan'],FILTER_SANITIZE_STRING);
-                    $AlatAngkutan=filter_var($_POST['AlatAngkutan'],FILTER_SANITIZE_STRING);
-                    include('koneksi.db.php');
-                    $sql="INSERT INTO `headersurat`(`TglSurat`, `NomorSurat`, `SifatSurat`, `TujuanSurat`, `Lampiran`, `Perihal`, `TanggalAwal`, `TanggalAkhir`, `TempatKegiatan`, `AcaraKegiatan`,`AlatAngkutan`) VALUES ('".$TglSurat."','".$NomorSurat."','".$SifatSurat."','".$TujuanSurat."','".$Lampiran."','".$Perihal."','".$TanggalAwal."','".$TanggalAkhir."','".$TempatKegiatan."','".$AcaraKegiatan."','".$AlatAngkutan."')";
-                    $q=mysqli_query($koneksi,$sql);
-                    if ($q) {
-                        echo '<div class="alert alert-success alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Success!</strong>Record Sudah disimpan.
-                        </div>';
-                    } else {
-                        echo '<div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Gagal!</strong>Record Gagal disimpan.
-                        </div>';
-                    }
+			<div class="offset-4 col-8">
+			<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+		<?php
+			if (isset($_POST['submit'])){
+                $NomorSurat=filter_var($_POST['NomorSurat'],FILTER_SANITIZE_STRING);
+                $IdSurat=filter_var($_POST['IdSurat'],FILTER_SANITIZE_STRING);
+				$TglSurat=filter_var($_POST['TglSurat'],FILTER_SANITIZE_STRING);
+                $SifatSurat=filter_var($_POST['SifatSurat'],FILTER_SANITIZE_STRING);
+                $TujuanSurat=filter_var($_POST['TujuanSurat'],FILTER_SANITIZE_STRING);
+                $Lampiran=filter_var($_POST['Lampiran'],FILTER_SANITIZE_STRING);
+                $Perihal=filter_var($_POST['Perihal'],FILTER_SANITIZE_STRING);
+                $TanggalAwal=filter_var($_POST['TanggalAwal'],FILTER_SANITIZE_STRING);
+                $TanggalAkhir=filter_var($_POST['TanggalAkhir'],FILTER_SANITIZE_STRING);
+                $TempatKegiatan=filter_var($_POST['TempatKegiatan'],FILTER_SANITIZE_STRING);
+                $AcaraKegiatan=filter_var($_POST['AcaraKegiatan'],FILTER_SANITIZE_STRING);
+                $AlatAngkutan=filter_var($_POST['AlatAngkutan'],FILTER_SANITIZE_STRING);
+                include('koneksi.db.php');
+				$sql="UPDATE `headersurat` SET `TglSurat`='".$TglSurat."',`NomorSurat`='".$NomorSurat."', `SifatSurat`='".$SifatSurat."',`TujuanSurat`='".$TujuanSurat."',`Lampiran`='".$Lampiran."',`Perihal`='".$Perihal."',`TanggalAwal`='".$TanggalAwal."',`TanggalAkhir`='".$TanggalAkhir."',`TempatKegiatan`='".$TempatKegiatan."',`AcaraKegiatan`='".$AcaraKegiatan."',`AlatAngkutan`='".$AlatAngkutan."' WHERE IdSurat='".$IdSurat."'";
+				$q=mysqli_query($koneksi,$sql); //echo $sql;
+				
+                if ($q){
+                    ?><div class="alert alert-success alert-dismissible">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" onclick="window.location.href='carisurat.php';"></button>
+                    <strong>Success!</strong>Record Sudah diganti.
+                    </div><?php
+                } else {
+                    ?><div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" onclick="window.location.href='carisurat.php';"></button>
+                    <strong>Gagal!</strong>Record Gagal diganti.
+                    </div><?php
                 }
-            ?>
-        </form>
+			}
+		?>
         </center>
     </body>
 </html>
