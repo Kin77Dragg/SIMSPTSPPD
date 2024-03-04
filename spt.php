@@ -38,9 +38,7 @@
                     <td>
                         <center>
                             <font size="4" style="font-family: 'Times New Roman', Times, serif;"><u><b>SURAT PERINTAH TUGAS</b></u></font><br>
-                            <font size="3" style="font-family: 'Times New Roman', Times, serif;">Nomor  : <input type="text" name="no_surat_1" style="font-size: 12px; font-family: time new romance; width: 25px;">/
-                                <input type="text" name="no_surat_2" style="font-size: 12px; font-family: time new romance; width: 25px;">/SPT.DPRD/SETWAN/
-                                <input type="text" name="no_surat_3" style="font-size: 12px; font-family: time new romance; width: 25px;"></font><br>
+                            <font size="3" style="font-family: 'Times New Roman', Times, serif;">Nomor  : <input type="text" name="no_surat_1" style="font-size: 12px; font-family: time new romance; width: 100px;">
                         </center>
                     </td>
                 </tr>
@@ -63,9 +61,8 @@
 <br>
 3.	Untuk 		:<br>
 &emsp;&emsp;&emsp;&emsp;<textarea rows="5" cols="30" name="kepada"></textarea><br><br>
-4.	Tanggal	:<input style="font-size: 12px; font-family: time new romance; width: 75px;" name="date" type="text" class="form-control"> S/d 
-<input style="font-size: 12px; font-family: time new romance; width: 75px;" name="date2" type="text" class="form-control">
-<input style="font-size: 12px; font-family: time new romance; width: 30px;" name="year" type="text" class="form-control"><br>
+4.	Tanggal	:<input style="font-size: 12px; font-family: time new romance; width: 100px;" id="TglAwal" name="TglAwal" type="text" class="form-control"> S/d 
+<input style="font-size: 12px; font-family: time new romance; width: 100px;" id="TglAkhir" name="TglAkhir" type="text" class="form-control">
 <br>
 5.	Keterangan	:<br>
 &emsp;&emsp;&emsp;&emsp;1.	Untuk dilaksanakan dengan penuh rasa tanggung jawab.<br>
@@ -81,8 +78,7 @@
             <p style="text-align: right;">
                 
                     Ditetapkan di Bengkulu&emsp;&emsp;<br>
-                Pada Tanggal, <input style="font-size: 12px; font-family: time new romance; width: 75px;" name="date" type="text" class="form-control">
-                <input style="font-size: 12px; font-family: time new romance; width: 30px;" name="year" type="text" class="form-control"><br>
+                Pada Tanggal, <input style="font-size: 12px; font-family: time new romance; width: 100px;" id="TglsSurat" name="TglSurat" type="text" class="form-control"><br>
                 Ketua DPRD Kota Bengkulu&emsp;<br><br><br><br><br>
                 <font size="3" style="font-family: 'Times New Roman', Times, serif;"><b><u>SUPRIANTO, S.IP.</u></b></font>
                 &emsp;&emsp;&emsp13;
